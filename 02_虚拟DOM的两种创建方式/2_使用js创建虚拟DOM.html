@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>hello react</title>
+  <title>2_使用js创建虚拟DOM</title>
 </head>
 <body>
   <div id="root"></div>
@@ -11,11 +11,10 @@
   <!-- 引入脚本，注意顺序 -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-  <script type="text/babel"> /* babel 转译标识 */
+  <script>
     const container = document.getElementById('root')
-    const VDOM = <h1>Hello, React</h1>
+    const VDOM = React.createElement('h1', { id: 'title' }, React.createElement('span', {}, 'Hello, React'))
     ReactDOM.render(VDOM, container)
   </script>
 </body>
