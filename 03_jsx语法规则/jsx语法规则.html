@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsx语法规则</title>
+  <style>
+    .title {
+      width: 200px;
+      background-color: bisque;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    // 容器
+    const container = document.getElementById('root')
+
+    // 创建虚拟 DOM
+    const myId = 'H2'
+    const myData = 'Hello, React'
+    const Good = () => {
+      return (
+        <p>good job!</p>
+      )
+    }
+    const VDOM = (
+      <div>
+        <h2 id={myId.toLowerCase()} className="title">
+          <span style={{ color: 'white', fontSize: '20px' }}>{myData.toLowerCase()}</span>
+        </h2>
+        <input type="text" />
+        <Good></Good>
+      </div>
+    )
+
+    // 渲染虚拟 DOM 到页面
+    ReactDOM.render(VDOM, container)
+
+    /*
+      jsx语法规则：
+        1、定义虚拟 DOM 时，不要写引号。
+        2、标签中混入 JS 表达式时用 {}。
+        3、样式类名指定使用 className。
+        4、内联样式，要用 style={{ key: value }}。
+        5、只有一个根标签。
+        6、标签必须闭合。
+        7、标签首字母
+            (1). 若小写，则将该标签转为 html 标签，若 html 中无该标签，则报错。
+            (2). 若大写，React 去渲染对应组件，若没有，则报错。
+    */
+  </script>
+</body>
+</html>
