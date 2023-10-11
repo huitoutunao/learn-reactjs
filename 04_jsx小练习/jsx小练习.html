@@ -14,6 +14,39 @@
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
   <script type="text/babel"> /* babel 转译标识 */
+    /*
+      一定注意区分：「js语句(代码)」与「js表达式」
+        1、表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方
+          例如：
+            (1). a
+            (2). a+b
+            (3). demo(1)
+            (4). arr.map()
+            (5). function name() {}
+        2、语句(代码)
+          例如：
+            (1). if() {}
+            (2). for() {}
+            (3). switch() { case: xxx }
+    */
+    const container = document.getElementById('root')
+    const data = ['Angular', 'React', 'Vue']
+    const VDOM = (
+      <div>
+        <h1>前端js框架列表</h1>
+        <ul>
+          {
+            data.map((elem, index) => {
+              return (
+                <li key={ index }>{ elem }</li>
+              )
+            })
+          }
+        </ul>
+      </div>
+    )
+
+    ReactDOM.render(VDOM, container)
   </script>
 </body>
 </html>
