@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3_类中方法this指向</title>
+</head>
+<body>
+  <script>
+    class Person {
+      constructor(name, age) {
+        this.name = name
+        this.age = age
+      }
+
+      // class 内部的开启了严格模式，所以它的 this 不会指向 window
+      speak() {
+        console.log(this)
+      }
+    }
+
+    const p1 = new Person()
+    p1.speak()
+    const x = p1.speak
+    x()
+
+    /* function demo() {
+      'use strict'
+      console.log(this)
+    }
+    demo() */
+  </script>
+</body>
+</html>

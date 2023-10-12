@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>state</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    const container = document.getElementById('root')
+    // 创建类式组件
+    class Weather extends React.Component {
+      // 构造器调用几次？—— 1次
+      constructor(props) {
+        console.log('constructor')
+        super(props)
+        this.state = {
+          isHot: true,
+          wind: '微风',
+        }
+
+        // 解决 changeWeather 的 this 指向问题
+        this.changeWeather = this.changeWeather.bind(this)
+      }
+
+      // changeWeather 调用几次？—— 跟随点击次数
+      changeWeather() {
+        // changeWeather 放在哪里？—— Weather 的原型对象上，供实例使用
+        // 因为 changeWeather 是作为 onClick 的回调，所以不是通过实例调用的，是直接调用
+        // 类中的方法默认开启了局部的严格模式，所以 changeWeather 中的 this 为 undefined
+        console.log(this)
+
+        const isHot = this.state.isHot
+        // 「重要」状态必须通过 setState 更新，且更新是一种合并，不是替换。
+        this.setState({isHot: !isHot})
+
+        // 「重要」状态 state 不可直接更改，下面这句就是直接更改！！！
+        // this.state.isHot = !this.state.isHot
+      }
+
+      // render 调用几次？—— 1+n次，1 是初始化，n 是状态更新次数
+      render() {
+        console.log('render')
+        const { isHot, wind } = this.state
+        return <h2 onClick={ this.changeWeather }>今天天气很{ isHot ? '炎热' : '凉爽' }，{ wind }</h2>
+      }
+    }
+
+    ReactDOM.render(<Weather/>, container)
+  </script>
+</body>
+</html>
