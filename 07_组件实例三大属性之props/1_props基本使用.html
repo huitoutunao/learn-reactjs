@@ -7,14 +7,19 @@
 </head>
 <body>
   <div id="root"></div>
+  <div id="root2"></div>
+  <div id="root3"></div>
 
   <!-- 引入脚本，注意顺序 -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
 
   <script type="text/babel"> /* babel 转译标识 */
     const container = document.getElementById('root')
+    const container2 = document.getElementById('root2')
+    const container3 = document.getElementById('root3')
 
     class Person extends React.Component {
       render() {
@@ -23,19 +28,39 @@
           <ul>
             <li>姓名：{ name }</li>
             <li>性别：{ sex }</li>
-            <li>年龄：{ age }</li>
+            <li>年龄：{ age + 1 }</li>
           </ul>
         )
       }
     }
 
-    // ReactDOM.render(<Person name="tom" sex="男" age="18" />, container)
+    // 对标签属性进行类型、必要性的限制
+    Person.propTypes = {
+      name: PropTypes.string.isRequired, // 限制 name 必传，且为字符串
+      sex: PropTypes.string, // 限制 sex 为字符串
+      age: PropTypes.number, // 限制 age 为数值
+      speak: PropTypes.func, // 限制 speak 为函数
+    }
+
+    // 指定默认标签属性值
+    Person.defaultProps = {
+      sex: '男', // sex 默认值为男
+      age: 20, // age 默认值为 20
+    }
+
     const p = {
       name: 'tom',
       sex: '男',
-      age: '19'
+      age: 19
     }
     ReactDOM.render(<Person {...p} />, container)
+
+    ReactDOM.render(<Person name="李四" sex="男" age={ 18 } speak={ speak } />, container2)
+    ReactDOM.render(<Person name="张三" sex="男" age={ 20 } />, container3)
+
+    function speak() {
+      console.log('我说话了')
+    }
   </script>
 </body>
 </html>
