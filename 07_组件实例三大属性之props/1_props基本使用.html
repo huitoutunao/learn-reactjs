@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1_props基本使用</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    const container = document.getElementById('root')
+
+    class Person extends React.Component {
+      render() {
+        const { name, sex, age } = this.props
+        return (
+          <ul>
+            <li>姓名：{ name }</li>
+            <li>性别：{ sex }</li>
+            <li>年龄：{ age }</li>
+          </ul>
+        )
+      }
+    }
+
+    // ReactDOM.render(<Person name="tom" sex="男" age="18" />, container)
+    const p = {
+      name: 'tom',
+      sex: '男',
+      age: '19'
+    }
+    ReactDOM.render(<Person {...p} />, container)
+  </script>
+</body>
+</html>
