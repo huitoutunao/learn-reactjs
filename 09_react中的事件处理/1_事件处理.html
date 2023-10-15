@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1_事件处理</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    const container = document.getElementById('root')
+    class Demo extends React.Component {
+      /*
+        (1). 通过 onXxx 属性指定事件处理函数（注意大小写）
+          a. React 使用的是自定义(合成)事件，而不是使用的原生 DOM 事件 —— 为了更好的兼容性
+          b. React 中的事件是通过事件委托方式处理的(委托给组件最外层的元素) —— 为了高效
+        (2). 通过 event.target 得到发生事件的 DOM 元素对象 —— 不要过度使用 ref，例如：第二个输入框可以省略 ref
+      */
+      // 创建 ref 容器
+      myRef = React.createRef()
+      // myRef2 = React.createRef()
+
+      showData = () => {
+        console.log(this.myRef)
+        alert(this.myRef.current.value)
+      }
+
+      showData2 = (event) => {
+        // alert(this.myRef2.current.value)
+        alert(event.target.value)
+      }
+
+      render() {
+        return (
+          <div>
+            <input ref={ this.myRef } type="text" placeholder="点击按钮提示数据" />&nbsp;
+            <button onClick={ this.showData }>点击提示左侧的数据</button>&nbsp;
+            <input type="text" placeholder="失去焦点提示数据" onBlur={ this.showData2 } />
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Demo />, container)
+  </script>
+</body>
+</html>
