@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2_回调函数形式的ref</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    const container = document.getElementById('root')
+    class Demo extends React.Component {
+      showData = () => {
+        // console.log(this)
+        const { input1 } = this
+        alert(input1.value)
+      }
+
+      showData2 = () => {
+        const { input2 } = this
+        alert(input2.value)
+      }
+
+      render() {
+        return (
+          <div>
+            <input ref={ c => this.input1 = c } type="text" placeholder="点击按钮提示数据" />&nbsp;
+            <button onClick={ this.showData }>点击提示左侧的数据</button>&nbsp;
+            <input ref={ c => this.input2 = c } type="text" placeholder="失去焦点提示数据" onBlur={ this.showData2 } />
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Demo />, container)
+  </script>
+</body>
+</html>
