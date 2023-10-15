@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2_props简写方式</title>
+  <title>3_函数组件使用props</title>
 </head>
 <body>
   <div id="root"></div>
@@ -21,7 +21,7 @@
     const container2 = document.getElementById('root2')
     const container3 = document.getElementById('root3')
 
-    class Person extends React.Component {
+    /* class Person extends React.Component {
       // 其实类构造器能省略就省略，日常开发中基本不用
       constructor(props) {
         // 构造器是否接收 props，是否传递给 super，取决于：是否希望在构造器中通过 this 访问 props
@@ -34,7 +34,6 @@
         name: PropTypes.string.isRequired, // 限制 name 必传，且为字符串
         sex: PropTypes.string, // 限制 sex 为字符串
         age: PropTypes.number, // 限制 age 为数值
-        speak: PropTypes.func, // 限制 speak 为函数
       }
 
       static defaultProps = {
@@ -54,21 +53,31 @@
           </ul>
         )
       }
+    } */
+
+    function Person(props) {
+      const { name, sex, age } = props
+      return (
+        <ul>
+          <li>姓名：{ name }</li>
+          <li>性别：{ sex }</li>
+          <li>年龄：{ age }</li>
+        </ul>
+      )
     }
 
-    const p = {
-      name: 'tom',
-      sex: '男',
-      age: 19
+    Person.propTypes = {
+      name: PropTypes.string.isRequired, // 限制 name 必传，且为字符串
+      sex: PropTypes.string, // 限制 sex 为字符串
+      age: PropTypes.number, // 限制 age 为数值
     }
-    ReactDOM.render(<Person {...p} />, container)
 
-    ReactDOM.render(<Person name="李四" sex="男" age={ 18 } speak={ speak } />, container2)
-    ReactDOM.render(<Person name="张三" sex="男" age={ 20 } />, container3)
-
-    function speak() {
-      console.log('我说话了')
+    Person.defaultProps = {
+      sex: '男', // sex 默认值为男
+      age: 20, // age 默认值为 20
     }
+
+    ReactDOM.render(<Person name="李四" sex="男" />, container)
   </script>
 </body>
 </html>
