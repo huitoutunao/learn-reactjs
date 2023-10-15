@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1_props基本使用</title>
+  <title>2_props简写方式 </title>
 </head>
 <body>
   <div id="root"></div>
@@ -22,6 +22,26 @@
     const container3 = document.getElementById('root3')
 
     class Person extends React.Component {
+      // 其实类构造器能省略就省略，日常开发中基本不用
+      constructor(props) {
+        // 构造器是否接收 props，是否传递给 super，取决于：是否希望在构造器中通过 this 访问 props
+        // console.log(props)
+        super(props)
+        console.log('constructor', this.props)
+      }
+
+      static propTypes = {
+        name: PropTypes.string.isRequired, // 限制 name 必传，且为字符串
+        sex: PropTypes.string, // 限制 sex 为字符串
+        age: PropTypes.number, // 限制 age 为数值
+        speak: PropTypes.func, // 限制 speak 为函数
+      }
+
+      static defaultProps = {
+        sex: '男', // sex 默认值为男
+        age: 20, // age 默认值为 20
+      }
+
       render() {
         const { name, sex, age } = this.props
         // props 是只读
@@ -34,20 +54,6 @@
           </ul>
         )
       }
-    }
-
-    // 对标签属性进行类型、必要性的限制
-    Person.propTypes = {
-      name: PropTypes.string.isRequired, // 限制 name 必传，且为字符串
-      sex: PropTypes.string, // 限制 sex 为字符串
-      age: PropTypes.number, // 限制 age 为数值
-      speak: PropTypes.func, // 限制 speak 为函数
-    }
-
-    // 指定默认标签属性值
-    Person.defaultProps = {
-      sex: '男', // sex 默认值为男
-      age: 20, // age 默认值为 20
     }
 
     const p = {
