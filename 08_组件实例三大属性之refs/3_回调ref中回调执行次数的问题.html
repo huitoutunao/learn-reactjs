@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3_回调ref中回调执行次数的问题</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    const container = document.getElementById('root')
+    class Demo extends React.Component {
+      state = {
+        isHot: false,
+      }
+
+      showInfo = () => {
+        const { input1 } = this
+        alert(input1.value)
+      }
+
+      saveInput = (elem) => {
+        this.input1 = elem
+        console.log('@', elem)
+      }
+
+      changeWeather = () => {
+        this.setState({
+          isHot: !this.state.isHot
+        })
+      }
+
+      // 参考官网：https://zh-hans.legacy.reactjs.org/docs/refs-and-the-dom.html#caveats-with-callback-refs
+      // 日常开发使用内联写法
+      render() {
+        return (
+          <div>
+            <h2>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h2>
+            {/* <input ref={ (c) => {this.input1 = c;console.log('@', c);} } type="text" placeholder="点击按钮提示数据" /><br/><br/> */}
+            <input ref={ this.saveInput } type="text" placeholder="点击按钮提示数据" /><br/><br/>
+            <button onClick={ this.showInfo }>点击提示左侧的数据</button>
+            <button onClick={ this.changeWeather }>点击改变天气</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Demo />, container)
+  </script>
+</body>
+</html>
