@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2_react生命周期(旧)</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    const container = document.getElementById('root')
+
+    class Count extends React.Component {
+
+      // 构造器
+      constructor(props) {
+        console.log('Count---constructor')
+        super(props)
+        this.state = {
+          count: 0,
+        }
+      }
+
+      add = () => {
+        const { count } = this.state
+        this.setState({
+          count: count + 1,
+        })
+      }
+
+      // 组件将要挂载
+      componentWillMount() {
+        console.log('Count---componentWillMount')
+      }
+
+      // 组件挂载完成
+      componentDidMount() {
+        console.log('Count---componentDidMount')
+      }
+
+      // 渲染中
+      render() {
+        console.log('Count---render')
+        const { count } = this.state
+        return (
+          <div>
+            <h2>当前求和为：{ count }</h2>
+            <button onClick={ this.add }>点击+1</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Count />, container)
+  </script>
+</body>
+</html>
