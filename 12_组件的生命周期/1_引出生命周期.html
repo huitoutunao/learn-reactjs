@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1_引出生命周期</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 引入脚本，注意顺序 -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel"> /* babel 转译标识 */
+    const container = document.getElementById('root')
+
+    class Life extends React.Component {
+      state = {
+        opacity: 1,
+      }
+
+      death = () => {
+        ReactDOM.unmountComponentAtNode(container)
+      }
+
+      // 组件挂载完成
+      componentDidMount() {
+        this.timer = setInterval(() => {
+          let { opacity } = this.state
+          opacity -= 0.1
+          if (opacity <= 0) opacity = 1
+          this.setState({ opacity })
+        }, 200)
+      }
+
+      // 组件将要卸载
+      componentWillUnmount() {
+        clearInterval(this.timer)
+      }
+
+      // 初始化渲染或状态更新后
+      render() {
+        return (
+          <div>
+            <h2 style={{ opacity: this.state.opacity }}>React 学不会怎么办</h2>
+            <button onClick={ this.death }>不活了</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Life />, container)
+  </script>
+</body>
+</html>
