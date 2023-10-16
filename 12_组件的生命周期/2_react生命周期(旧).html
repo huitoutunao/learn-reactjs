@@ -16,6 +16,13 @@
   <script type="text/babel"> /* babel 转译标识 */
     const container = document.getElementById('root')
 
+    /*
+      常用生命周期钩子：
+      componentDidMount ===> 常用，一般在这个钩子中做初始化的时，例如：开启定时器，发送请求，订阅消息
+      componentWillUnmount ===> 一般在这个钩子中做收尾的事，例如：关闭定时器，取消订阅消息
+      render ===> 必须使用
+    */
+
     class Count extends React.Component {
 
       // 构造器
@@ -34,6 +41,14 @@
         })
       }
 
+      death = () => {
+        ReactDOM.unmountComponentAtNode(container)
+      }
+
+      force = () => {
+        this.forceUpdate()
+      }
+
       // 组件将要挂载
       componentWillMount() {
         console.log('Count---componentWillMount')
@@ -44,6 +59,27 @@
         console.log('Count---componentDidMount')
       }
 
+      // 组件将要卸载
+      componentWillUnmount() {
+        console.log('Count---componentWillUnmount')
+      }
+
+      // 控制组件更新的阀门
+      shouldComponentUpdate() {
+        console.log('Count---shouldComponentUpdate')
+        return true
+      }
+
+      // 组件将要更新
+      componentWillUpdate() {
+        console.log('Count---componentWillUpdate')
+      }
+
+      // 组件更新完成
+      componentDidUpdate() {
+        console.log('Count---componentDidUpdate')
+      }
+
       // 渲染中
       render() {
         console.log('Count---render')
@@ -52,6 +88,64 @@
           <div>
             <h2>当前求和为：{ count }</h2>
             <button onClick={ this.add }>点击+1</button>
+            <button onClick={ this.death }>点击卸载</button>
+            <button onClick={ this.force }>不更改任何状态中的数据，更新视图</button>
+          </div>
+        )
+      }
+    }
+
+    // 父组件 A
+    class A extends React.Component {
+      state = {
+        carName: '奔驰',
+      }
+
+      changeCar = () => {
+        this.setState({
+          carName: '宝马',
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <div>我是A组件</div>
+            <button onClick={ this.changeCar }>换车</button>
+            <B carName={this.state.carName} />
+          </div>
+        )
+      }
+    }
+
+    // 子组件 B
+    class B extends React.Component {
+      // 组件将要接收新的 props
+      componentWillReceiveProps(props) {
+        console.log('B---componentWillReceiveProps', props)
+      }
+
+      // 控制组件更新的阀门
+      shouldComponentUpdate() {
+        console.log('B---shouldComponentUpdate')
+        return true
+      }
+
+      // 组件将要更新
+      componentWillUpdate() {
+        console.log('B---componentWillUpdate')
+      }
+
+      // 组件更新完成
+      componentDidUpdate() {
+        console.log('B---componentDidUpdate')
+      }
+
+      render() {
+        console.log('B---render')
+        return (
+          <div>
+            <div>我是B组件，接收到的车是：{ this.props.carName }</div>
           </div>
         )
       }
