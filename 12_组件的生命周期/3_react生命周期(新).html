@@ -42,9 +42,16 @@
         this.forceUpdate()
       }
 
+      // 若 state 的值在任何时候都取决于 props，那么可以使用 getDerivedStateFromProps
       static getDerivedStateFromProps(props, state) {
         console.log('getDierivedStateFromProps', props, state)
-        return props
+        return null
+      }
+
+      // 在更新前进行快照
+      getSnapshotBeforeUpdate(preProps, preState) {
+        console.log('getSnapshotBeforeUpdate')
+        return 'hello world'
       }
 
       // 组件将要挂载
@@ -74,8 +81,8 @@
       // }
 
       // 组件更新完成
-      componentDidUpdate() {
-        console.log('Count---componentDidUpdate')
+      componentDidUpdate(preProps, preState, snapshotValue) {
+        console.log('Count---componentDidUpdate', preProps, preState, snapshotValue)
       }
 
       // 渲染中
