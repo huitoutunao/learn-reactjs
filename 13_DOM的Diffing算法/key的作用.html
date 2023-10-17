@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>key的作用</title>
+</head>
+<body>
+  <!-- 引入脚本，注意顺序 -->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script>
+    /*
+      1、虚拟 DOM 中 key 的作用：
+        (1). 简单的说：key 是虚拟 DOM 对象标识，在更新显示时 key 起着极其重要的作用。
+        (2). 详细的说：当状态中的数据发生变化时， react 会根据「新数据」生成「新的虚拟 DOM」，随后 React 进行「新虚拟 DOM」与「旧虚拟 DOM」的 diff 比较，比较规则如下：
+          a. 旧虚拟 DOM 中找到了与 新虚拟 DOM 相同的 key：
+            a1. 若虚拟 DOM 中内容没变，直接使用之前的真实 DOM
+            a2. 若虚拟 DOM 中内容变了，则生成新的真实 DOM，随后替换掉页面中之前的真实 DOM
+          b. 旧虚拟 DOM 中未找到与新虚拟 DOM 相同的 key，根据数据创建新的真实 DOM，随后渲染到页面
+
+      2、用 index 作为 key 可能引发的问题
+        (1). 若对数据进行：逆序添加、逆序删除等破坏顺序操作，会产生没有必要的真实 DOM 更新 ==> 界面效果没有问题，但效率低。
+        (2). 如果结构中还包含输入类的 DOM，会产生错误 DOM 更新 ==> 界面有问题。
+        (3). 「注意」如果不存在对数据的逆序添加，逆序删除等破坏顺序操作，仅用于渲染列表展示，使用 index 作为 key 没有问题。
+
+      3、开发中如何选择 key？
+        (1). 最好使用每条数据的唯一标识作为 key，比如：id、手机号、身份证号、学号等唯一值。
+        (2). 如果确定只是简单的展示数据，用 index 也是可以。
+    */
+  </script>
+</body>
+</html>
