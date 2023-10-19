@@ -31,12 +31,21 @@ export default class App extends Component {
     ]
   }
 
+  // 添加，接收一个 todo 对象
+  addTodo = (todoObj) => {
+    const { todos } = this.state
+    const newTodos = [todoObj, ...todos]
+    this.setState({
+      todos: newTodos,
+    })
+  }
+
   render() {
     const { todos } = this.state
     return (
       <div className="todo-container">
         <div className="todo-wrap">
-          <Header />
+          <Header addTodo={ this.addTodo } />
           <List todos={ todos } />
           <Footer />
         </div>
