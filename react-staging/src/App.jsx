@@ -5,6 +5,8 @@ import Footer from './components/Footer'
 import './App.css'
 
 export default class App extends Component {
+  // 状态在哪里，操作方法就在哪里
+
   // 初始化状态
   state = {
     todos: [
@@ -40,13 +42,36 @@ export default class App extends Component {
     })
   }
 
+  updateTodo = (id, done) => {
+    const { todos } = this.state
+    const newTodos = todos.map((item) => {
+      if (item.id === id) {
+        return {...item, done}
+      }
+
+      return item
+    })
+
+    this.setState({
+      todos: newTodos
+    })
+  }
+
+  delTodo = (id) => {
+    const { todos } = this.state
+    const newTodos = todos.filter((item) => item.id !== id)
+    this.setState({
+      todos: newTodos
+    })
+  }
+
   render() {
     const { todos } = this.state
     return (
       <div className="todo-container">
         <div className="todo-wrap">
           <Header addTodo={ this.addTodo } />
-          <List todos={ todos } />
+          <List todos={ todos } updateTodo={ this.updateTodo } delTodo={ this.delTodo } />
           <Footer />
         </div>
       </div>
