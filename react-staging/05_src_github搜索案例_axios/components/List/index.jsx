@@ -1,27 +1,9 @@
 import React, { Component } from 'react'
-import PubSub from 'pubsub-js'
 import './index.css'
 
 export default class List extends Component {
-  state = {
-    users: [],
-    isFirst: true,
-    isLoading: false,
-    errText: '',
-  }
-
-  componentDidMount() {
-    this.token = PubSub.subscribe('pub', (_, setData) => {
-      this.setState(setData)
-    })
-  }
-
-  componentWillUnmount() {
-    PubSub.unsubscribe(this.token)
-  }
-
   render() {
-    const { users, isFirst, isLoading, errText } = this.state
+    const { users, isFirst, isLoading, errText } = this.props
 
     return (
       <div className="row">

@@ -1,20 +1,16 @@
 import React, { Component } from 'react'
-import PubSub from 'pubsub-js'
 import axios from 'axios'
 
 export default class Header extends Component {
   search = () => {
     // 获取用户的输入（连续解构赋值+重命名）
     const { keyWordElem: { value: keyWord } } = this
-    /* this.props.updateAppState({ isFirst: false, isLoading: true }) */
-    PubSub.publish('pub', { isFirst: false, isLoading: true })
+    this.props.updateAppState({ isFirst: false, isLoading: true })
     axios.get(`https://api.github.com/search/users?q=${keyWord}`)
       .then((result) => {
-        /* this.props.updateAppState({ isLoading: false, users: result.data.items }) */
-        PubSub.publish('pub', { isLoading: false, users: result.data.items })
+        this.props.updateAppState({ isLoading: false, users: result.data.items })
       }).catch((err) => {
-        /* this.props.updateAppState({ isLoading: false, users: [], errText: `请求出错 ${err.message}` }) */
-        PubSub.publish('pub', { isLoading: false, users: [], errText: `请求出错 ${err.message}` })
+        this.props.updateAppState({ isLoading: false, users: [], errText: `请求出错 ${err.message}` })
       })
   }
 
