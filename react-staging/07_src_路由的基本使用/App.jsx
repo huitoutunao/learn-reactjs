@@ -1,20 +1,7 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
-import HomeView from './pages/Home'
-import AboutView from './pages/About'
-
-/*
-  路由组件与一般组件
-    1. 写法不同：
-      一般组件：<Demo/>
-      路由组件：<Route path='/about' component={ Demo }></Route>
-    2. 存放位置不同：
-      一般组件：components
-      路由组件：pages
-    3. 接收到的 props 不同：
-      一般组件：写组件标签时传递了什么，就能收到什么
-      路由组件：接收到三个固定的属性 history、location、match
-*/
+import HomeView from './components/Home'
+import AboutView from './components/About'
 
 export default class App extends Component {
   render() {
@@ -38,6 +25,7 @@ export default class App extends Component {
               {/* 在 React 中靠路由链接实现切换组件 */}
               <Link className='list-group-item' to='/about'>About</Link>
               <Link className='list-group-item' to='/home'>Home</Link>
+
 
             </div>
           </div>
