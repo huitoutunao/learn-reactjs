@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import HomeView from './pages/Home'
 import AboutView from './pages/About'
 import MyNavlink from './components/MyNavlink'
@@ -49,11 +49,8 @@ export default class App extends Component {
             <div className='panel'>
               <div className='panel-body'>
                 {/* 注册路由 */}
-                {/* Switch 正确匹配路径后不再往下执行匹配 */}
-                <Switch>
-                  <Route path='/about' component={ AboutView }></Route>
-                  <Route path='/home' component={ HomeView }></Route>
-                </Switch>
+                <Route path='/about' component={ AboutView }></Route>
+                <Route path='/home' component={ HomeView }></Route>
               </div>
             </div>
           </div>
