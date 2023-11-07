@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import HomeView from './pages/Home'
 import AboutView from './pages/About'
 import MyNavlink from './components/MyNavlink'
@@ -52,8 +52,9 @@ export default class App extends Component {
                 {/* Switch 正确匹配路径后不再往下执行匹配 */}
                 {/* Route 严格匹配属性 exact=true，默认是模糊匹配，输入的路径必须包含要匹配的路径，且顺序要一致 */}
                 <Switch>
-                  <Route exact path='/about' component={ AboutView }></Route>
-                  <Route exact path='/home' component={ HomeView }></Route>
+                  <Route path='/about' component={ AboutView }></Route>
+                  <Route path='/home' component={ HomeView }></Route>
+                  <Redirect to='/about'></Redirect>
                 </Switch>
               </div>
             </div>
