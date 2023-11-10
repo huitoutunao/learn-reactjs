@@ -108,7 +108,7 @@ export default class Messages extends Component {
         {/* search 参数无须声明接收，备注：刷新页面可以保存参数 */}
         {/* <Route path='/home/messages/detail' component={ Detail } /> */}
 
-        {/* state 参数无须声明接收，备注：刷新页面可以保存参数 */}
+        {/* state 参数无须声明接收，备注：BrowserRouter 刷新页面可以保存参数, HashRouter 刷新页面不能保存参数 */}
         <Route path='/home/messages/detail' component={ Detail } />
 
         <button onClick={ this.back }>
