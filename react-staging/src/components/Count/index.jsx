@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import store from '../../redux/store'
 
 export default class Count extends Component {
   state = {
@@ -48,7 +49,7 @@ export default class Count extends Component {
   render() {
     return (
       <div>
-        <h1>当前求和为：{ this.state.count }</h1>
+        <h1>当前求和为：{ store.getState() }</h1>
         <select ref={ c => this.selectNumber = c }>
           <option value="1">1</option>
           <option value="2">2</option>
