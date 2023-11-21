@@ -18,7 +18,7 @@ function mapStateToProps(state) {
   2、返回值为对象
   3、mapDispatchToProps 用于传递操作状态的方法
 */
-function mapDispatchToProps(dispatch) {
+/* function mapDispatchToProps(dispatch) {
   return {
     increment: (number) => {
       dispatch(createIncrementAction(number))
@@ -30,6 +30,13 @@ function mapDispatchToProps(dispatch) {
       dispatch(createIncrementAsyncAction(number, time))
     }
   }
+} */
+
+// 简写形式
+const mapDispatchToProps = {
+  increment: createIncrementAction,
+  decrement: createDecrementAction,
+  incrementAsync: createIncrementAsyncAction
 }
 
 // 使用 connect()() 创建并暴露一个 Count 容器组件
