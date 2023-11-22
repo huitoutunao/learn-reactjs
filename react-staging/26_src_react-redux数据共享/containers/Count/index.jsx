@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/count-action'
+import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/actions/count'
 import { connect } from 'react-redux'
 
 class Count extends Component {
@@ -33,7 +33,8 @@ class Count extends Component {
   render() {
     return (
       <div>
-        <h1>当前求和为：{ this.props.count }</h1>
+        <h2>我是Count组件，下方总人数为{this.props.persons.length}</h2>
+        <h4>当前求和为：{ this.props.count }</h4>
         <select ref={ c => this.selectNumber = c }>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -55,7 +56,8 @@ class Count extends Component {
 */
 function mapStateToProps(state) {
   return {
-    count: state
+    count: state.count,
+    persons: state.persons,
   }
 }
 

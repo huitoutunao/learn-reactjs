@@ -1,4 +1,4 @@
-import { INCREMENT, DECREMENT } from './constant'
+import { INCREMENT, DECREMENT } from '../constant'
 
 // 同步 action，就是指 action 的值为 Object 类型的一般对象
 export const createIncrementAction = (data) => {
