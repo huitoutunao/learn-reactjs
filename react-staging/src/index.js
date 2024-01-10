@@ -12,6 +12,8 @@ root.render(
   </React.StrictMode>
 )
 
+export default root
+
 // 全局订阅
 /* store.subscribe(() => {
   root.render(
