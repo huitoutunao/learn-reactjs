@@ -6,6 +6,7 @@ export default function Review() {
     setCount(v => v + 1)
   }
 
+  // 开发模式下，setup-cleanup-setup
   useEffect(() => {
     console.log('setup')
     return () => {
