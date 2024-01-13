@@ -1,12 +1,18 @@
-// import React, { Component } from 'react'
+// import React, { Component, createRef } from 'react'
 // import ReactDOM from 'react-dom'
 import root from '../../index'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 // 类式组件
 /* class Demo extends Component {
   state = {
     count: 0,
+  }
+
+  myRef = createRef()
+
+  show = () => {
+    console.log(this.myRef.current.value)
   }
 
   add = () => {
@@ -26,8 +32,10 @@ import { useState, useEffect } from 'react'
   render() {
     return (
       <div>
+        <input type="text" ref={this.myRef} />
         <h2>当前求和为{this.state.count}</h2>
         <button onClick={this.add}>点我+1</button>
+        <button onClick={this.show}>展示输入信息</button>
       </div>
     )
   }
@@ -36,6 +44,12 @@ import { useState, useEffect } from 'react'
 // 函数式组件
 function Demo () {
   const [count, setCount] = useState(0)
+  const myRef = useRef()
+
+  const show = () => {
+    console.log(myRef.current.value)
+  }
+
   const add = () => {
     // setCount(count + 1)
     setCount(count => count + 1)
@@ -56,9 +70,11 @@ function Demo () {
 
   return (
     <div>
+      <input type="text" ref={myRef} />
       <h2>当前求和为{count}</h2>
       <button onClick={add}>点我+1</button>
       <button onClick={unmount}>卸载组件</button>
+      <button onClick={show}>展示输入信息</button>
     </div>
   )
 }
