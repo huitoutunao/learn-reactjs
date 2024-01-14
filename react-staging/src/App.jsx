@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import Demo from './components/3_hooks'
+import Demo from './components/4_fragment'
 // import Review from './components/3_hooks/review'
 
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <>
         <Demo />
         {/* <Review /> */}
-      </div>
+      </>
     )
   }
 }
