@@ -1,14 +1,7 @@
-import React, { Component } from 'react'
-import Demo from './components/7_renderProps'
-// import Review from './components/3_hooks/review'
+import React from 'react'
 
-export default class App extends Component {
-  render() {
-    return (
-      <>
-        <Demo />
-        {/* <Review /> */}
-      </>
-    )
-  }
+export default function App() {
+  return (
+    <div>App</div>
+  )
 }
