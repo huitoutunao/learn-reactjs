@@ -1,23 +1,12 @@
 import React from 'react'
-import { NavLink, Navigate, useRoutes } from 'react-router-dom'
+import { NavLink, Routes, Route, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 
 export default function App() {
-  const element = useRoutes([
-    {
-      path: '/about',
-      element: <About />,
-    },
-    {
-      path: '/home',
-      element: <Home />,
-    },
-    {
-      path: '/',
-      element: <Navigate to="/about" />,
-    },
-  ])
+  function computedClassName({ isActive }) {
+    return isActive ? 'list-group-item active' : 'list-group-item'
+  }
 
   return (
     <div>
@@ -37,8 +26,8 @@ export default function App() {
               <a className='list-group-item' href='./about.html'>About</a> */}
 
               {/* 路由链接 */}
-              <NavLink className="list-group-item" to='./home'>Home</NavLink>
-              <NavLink className="list-group-item" to='./about'>About</NavLink>
+              <NavLink className={computedClassName} to='./home'>Home</NavLink>
+              <NavLink className={computedClassName} to='./about'>About</NavLink>
 
             </div>
           </div>
@@ -46,7 +35,11 @@ export default function App() {
             <div className='panel'>
               <div className='panel-body'>
                 {/* 注册路由 */}
-                {element}
+                <Routes>
+                  <Route path='/home' element={ <Home /> }></Route>
+                  <Route path='/about' element={ <About /> }></Route>
+                  <Route path='/' element={ <Navigate to="/about" /> }></Route>
+                </Routes>
               </div>
             </div>
           </div>
