@@ -14,7 +14,7 @@ export default function Message() {
           messages.map((item) => {
             return (
               <li key={item.id}>
-                <Link to="detail" state={{ id: item.id, content: item.content }}>{item.title}</Link>
+                <Link to={`detail?id=${item.id}&title=${item.title}&content=${item.content}`}>{item.title}</Link>
               </li>
             )
           })
