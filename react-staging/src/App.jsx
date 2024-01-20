@@ -1,11 +1,19 @@
 import React from 'react'
-import { NavLink, useRoutes } from 'react-router-dom'
+import { NavLink, useRoutes, useNavigate, useInRouterContext } from 'react-router-dom'
 import routes from './routes'
 // import Home from './pages/Home'
 // import About from './pages/About'
 
 export default function App() {
   const element = useRoutes(routes)
+  console.log('useInRouterContext', useInRouterContext())
+  const navigate = useNavigate()
+  const back = () => {
+    navigate(-1)
+  }
+  const forward = () => {
+    navigate(1)
+  }
 
   return (
     <div>
@@ -13,6 +21,8 @@ export default function App() {
           <div className='col-xs-offset-2 col-xs-8'>
             <div className='page-header'>
               <h2>React Router Demo</h2>
+              <button onClick={forward}>前进</button>
+              <button onClick={back}>后退</button>
             </div>
           </div>
         </div>
