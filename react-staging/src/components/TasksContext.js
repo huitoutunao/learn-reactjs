@@ -43,7 +43,7 @@ export function TasksProvider({ children }) {
   const [tasks, dispatch] = useReducer(
     tasksReducer,
     initialTasks
-  );
+  )
 
   return (
     <TasksContext.Provider value={tasks}>
@@ -51,5 +51,5 @@ export function TasksProvider({ children }) {
         {children}
       </TasksDispatchContext.Provider>
     </TasksContext.Provider>
-  );
+  )
 }
