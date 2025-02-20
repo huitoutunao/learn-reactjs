@@ -1,0 +1,15 @@
+.base {
+  font-size: 18px;
+}
+
+.text {
+  /* 继承基础样式 ，增加额外的样式 fontSize */
+  composes: base;
+  /* base 样式在 style1.css 文件中 */
+  /* composes:base from './style1.css'; */
+  color: red;
+}
+
+:global(.text_bg) {
+  background-color: aqua;
+}
